@@ -1,0 +1,45 @@
+def solution(food_times, k):
+
+    list_food = food_times.copy()
+    temp = k
+
+    if sum(list_food) < k :
+        return -1
+    min_food = min (list_food)
+    if int (temp / len (list_food)) >= min (list_food) :
+        for i in range (len (list_food)) :
+            list_food[i] -= min_food
+        temp = temp - min_food * len(list_food)
+    else :
+        for i in range (len (list_food)) :
+            list_food[i] -= int (temp / len (list_food))
+        temp = temp - int (temp / len(list_food)) * len (list_food)
+
+    count  = 0
+    index = 0
+
+    if sum (list_food) <= temp:
+        return -1
+
+    while True :
+
+        if count == temp :
+            if list_food[index] != 0 :
+                break
+            else :
+                index += 1
+                if index == len (list_food) :
+                    index = 0
+                continue
+
+        if list_food[index] != 0 :
+            list_food[index] -= 1
+            index += 1
+            count += 1
+        else :
+            index += 1
+
+        if index == len (list_food) :
+            index = 0
+
+    return index + 1
