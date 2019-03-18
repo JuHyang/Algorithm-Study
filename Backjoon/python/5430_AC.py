@@ -1,31 +1,53 @@
-T = int (input ())
-for i in range (T) :
-    status = 0
-    p = input ()
-    n = int (input ())
-    arr = input ()
-    arr = arr[1:-1]
-    list_num = arr.split(",")
-    if arr == '' :
-        list_num = []
-    for j in range (n) :
-        list_num[j] = int (list_num[j])
-    for j in p :
-        if j == "R" :
-            list_num.reverse()
-        elif j == "D" :
-            if len(list_num) == 0 :
-                print ("error")
-                status = 1
+def printArr (arr, direction) :
+    result = "["
+    length = len (arr)
+    if length == 0 :
+        print ("[]")
+        return
+    if direction == 1 :
+        for i in range (length) :
+            if i == length - 1 :
+                result += arr[i] + "]"
                 break
-            else :
-                list_num.pop(0)
-    if status != 1 :
-        result = "["
-        for i in range (len (list_num)) :
-            if i == len (list_num) - 1 :
-                result += str (list_num[i])
-            else :
-                result += str (list_num[i]) + ","
-        result += "]"
-        print (result)
+            result += arr[i] + ","
+    else :
+        for i in range(1, length + 1):
+            if i == length :
+                result += arr[-i] + "]"
+                break
+            result += arr[-i] + ","
+    print (result)
+
+def main () :
+    
+    T = int (input ())
+
+    for i in range (T) :
+        error = 0
+        p = input ()
+        n = int (input ())
+        input_arr = input ()
+        
+        input_arr = input_arr[1:-1]
+        input_arr = input_arr.split(",")
+        if input_arr[0] == '' :
+            input_arr.pop()
+        direction = 1
+
+        for j in p :
+            if j == "R" :
+                direction *= -1
+            if j == "D" :
+                if len (input_arr) == 0 :
+                    print ("error")
+                    error = 1
+                    break
+                if direction == 1 :
+                    input_arr.pop(0)
+                elif direction == -1 :
+                    input_arr.pop()
+        if error == 1 :
+            continue
+        printArr (input_arr, direction)
+
+main()
