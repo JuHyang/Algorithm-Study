@@ -22,10 +22,7 @@ def solution(name):
             b =  (abs (len (name) + index - i))
             gab = min (a, b)
             temp.append(gab)
-        print (temp)
         index = temp.index(min(temp))
         index = bool_list.pop(index)
-        print (index)
-        print (index_temp)
         answer += min(temp)
     return answer
