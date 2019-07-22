@@ -15,7 +15,6 @@ def solution(name):
     
     index = 0
     while len (bool_list) != 0:
-        index_temp = index
         temp = []
         for i in bool_list :
             a =  (abs (index - i))
